@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Temp Converter</string>
+    <string name="fah_to_cel">Fah to Cel</string>
+    <string name="cel_to_fah">Cel to Fah</string>
+    <string name="equal">=</string>
+    <string name="convert">Convert</string>
+    <string name="error">TextView</string>
+    <string name="reset">Reset</string>
+</resources>
