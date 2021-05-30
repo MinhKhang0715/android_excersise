@@ -22,7 +22,9 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.RoundingMode;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     Spinner _spinner2;
     Button _bConvert;
     ImageView _switch;
-    ArrayList<String> _currencys;
+    ArrayList<String> _currencies;
     ArrayList<Double> _exchangeRates;
     Double _exchangeRate1;
     Double _exchangeRate2;
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         _spinner2 = findViewById(R.id.currency2);
         _bConvert = findViewById(R.id.convert);
         _switch = findViewById(R.id.imageView2);
-        _currencys = new ArrayList<>();
+        _currencies = new ArrayList<>();
         _exchangeRates = new ArrayList<>();
 
         _spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -78,7 +80,11 @@ public class MainActivity extends AppCompatActivity {
         _bConvert.setOnClickListener(v -> {
             String s = _input.getText().toString();
             if (!s.equals("")) {
-                _output.setText(_exchangeRate2 / _exchangeRate1 * (Double.parseDouble(s)) + "");
+                DecimalFormat decimalFormat = new DecimalFormat("#.###");
+                decimalFormat.setRoundingMode(RoundingMode.CEILING);
+                double result = _exchangeRate2 / _exchangeRate1 * (Double.parseDouble(s));
+                String resultAfterRounding = decimalFormat.format(result);
+                _output.setText(resultAfterRounding + "");
             } else {
                 Toast.makeText(getApplicationContext(), "Enter Value", Toast.LENGTH_SHORT).show();
             }
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         } else if (xpp.getName().equalsIgnoreCase("title")) {
                             if (insideItem) {
                                 String s = xpp.nextText();
-                                _currencys.add(s.substring(s.indexOf('/') + 1));
+                                _currencies.add(s.substring(s.indexOf('/') + 1));
                             }
                         } else if (xpp.getName().equalsIgnoreCase("description")) {
                             if (insideItem) {
@@ -158,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(Exception s) {
             super.onPostExecute(s);
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, _currencys);
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, _currencies);
 
             _spinner1.setAdapter(adapter);
             _spinner2.setAdapter(adapter);

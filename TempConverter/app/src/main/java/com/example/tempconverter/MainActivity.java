@@ -3,7 +3,6 @@ package com.example.tempconverter;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -14,6 +13,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.regex.Pattern;
 
 public class MainActivity extends AppCompatActivity {
@@ -90,9 +91,11 @@ public class MainActivity extends AppCompatActivity {
                 histories.setAdapter(toHistoryAdapter);
             }
             else if (radioButtonFahToCel.isChecked()) {
+                DecimalFormat decimalFormat = new DecimalFormat("#.###");
+                decimalFormat.setRoundingMode(RoundingMode.CEILING);
                 double result = (input - 32.0) * 5.0 / 9.0;
-                String txtResultValue = String.valueOf(result);
-                String toHistory = input + "°F=" + result + "°C";
+                String txtResultValue = decimalFormat.format(result);
+                String toHistory = input + "°F=" + txtResultValue + "°C";
 
                 editTextResult.setText(txtResultValue, TextView.BufferType.EDITABLE);
                 toHistoryAdapter.add(toHistory);
