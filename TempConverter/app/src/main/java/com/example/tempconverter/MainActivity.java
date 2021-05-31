@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 histories.setAdapter(toHistoryAdapter);
             }
             else if (radioButtonFahToCel.isChecked()) {
-                DecimalFormat decimalFormat = new DecimalFormat("#.###");
+                DecimalFormat decimalFormat = new DecimalFormat("#,###.000");
                 decimalFormat.setRoundingMode(RoundingMode.CEILING);
                 double result = (input - 32.0) * 5.0 / 9.0;
                 String txtResultValue = decimalFormat.format(result);

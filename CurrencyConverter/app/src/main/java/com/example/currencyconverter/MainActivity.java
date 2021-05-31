@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         _bConvert.setOnClickListener(v -> {
             String s = _input.getText().toString();
             if (!s.equals("")) {
-                DecimalFormat decimalFormat = new DecimalFormat("#.###");
+                DecimalFormat decimalFormat = new DecimalFormat("#,###.000");
                 decimalFormat.setRoundingMode(RoundingMode.CEILING);
                 double result = _exchangeRate2 / _exchangeRate1 * (Double.parseDouble(s));
                 String resultAfterRounding = decimalFormat.format(result);
