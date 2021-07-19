@@ -21,7 +21,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.io.InputStream;    
 import java.math.RoundingMode;
 import java.net.URL;
 import java.text.DecimalFormat;
